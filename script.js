@@ -144,6 +144,10 @@ function updateNumbers() {
                 }
                 values = [];
             }
+
+            if (button.firstElementChild.classList.contains("decimal")) {
+                alert("Sorry haven't added functionality for decimals yet lol");
+            }
         })
     })
 }
