@@ -11,4 +11,5 @@ To-Do:\
     -Fix the calculator breaking if user divides zero by zero\
     -Add a backspace\
     -Improve CSS\
-    -Make whatever the fuck algorithm I created to evaluate the expressions at least somewhat decent
+    -Make whatever the fuck algorithm I created to evaluate the expressions at least somewhat decent\
+    -Add keyboard support
