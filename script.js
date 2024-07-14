@@ -138,7 +138,7 @@ function updateNumbers() {
                         result = resultBox.textContent = errorText;
                         currentOperation.textContent = result;
                     } else {
-                        resultBox.textContent = divide(checkIfDivideByZero);
+                        result = resultBox.textContent = divide(checkIfDivideByZero);
                         currentOperation.textContent = result;
                     }
                 }
