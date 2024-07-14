@@ -122,8 +122,14 @@ function updateNumbers() {
                 }
                 if (values.find((element) => element === 'x')) {
                     newValues = values.slice(0, (values.indexOf('x') + 2));
-                    result = resultBox.textContent = multiply(newValues.filter((item) => +item).reduce((acc,x) => acc.concat(+x), []));
-                    currentOperation.textContent = result;
+                    let checkIfMultiplyByZero = newValues.filter((item) => +item).reduce((acc,x) => acc.concat(+x), []);
+                    if (checkIfMultiplyByZero.length === 1) {
+                        result = 0;
+                        currentOperation.textContent = result;
+                    } else {
+                        result = resultBox.textContent = multiply(checkIfMultiplyByZero);
+                        currentOperation.textContent = result;
+                    }
                 }
                 if (values.find((element) => element === '/')) {
                     newValues = values.slice(0, (values.indexOf('/') + 2));
