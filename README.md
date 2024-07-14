@@ -6,8 +6,8 @@ Input a simple math function with the buttons by using your mouse, and execute i
 
 Yep, that's a calculator.
 
-To-Do:
-    -Add decimal functionality
-    -Fix the calculator breaking if user divides zero by zero
-    -Add a backspace
+To-Do:\
+    -Add decimal functionality\
+    -Fix the calculator breaking if user divides zero by zero\
+    -Add a backspace\
     -Improve CSS
