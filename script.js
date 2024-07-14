@@ -6,25 +6,32 @@ function add(num) {
     return result = num.reduce((a,b) => a+b);
 }
 
-
-
-
-function subtract(num1, num2) {
-    return num1 - num2;
+function subtract(num) {
+    let result = 0;
+    return result = num.reduce((a,b) => a-b);
 }
 
-function multiply(num1, num2) {
-    return num1 * num2;
+function multiply(num) {
+    let result = 0;
+    return result = num.reduce((a,b) => a*b);
 }
 
-function divide(num1, num2) {
-    return num1 / num2;
+function divide(num) {
+    let result = 0;
+    return result = num.reduce((a,b) => {
+        if (a === 0 || b === 0) {
+            return 'lol dumbass';
+        } else {
+            return a/b;
+        }
+    });
 }
 
 let num;
 let operatorType;
 
 function operate(operatorType, ...num) {
+    console.log(num);
     let result;
     switch (operatorType) {
         case ('+'):
@@ -39,6 +46,7 @@ function operate(operatorType, ...num) {
         case ('/'):
             result = divide(num);
             break;
+            
     }
     return result;
 }
@@ -46,15 +54,23 @@ function operate(operatorType, ...num) {
 // DOM manipulation
 
 const resultBox = document.querySelector(".results");
+const currentOperation = document.querySelector('.currentOperation');
 const buttons = document.querySelectorAll(".button");
 let currentValue;
 let prevValue;
 let values = [];
 let operator;
+let result = 0;
+let errorText = 'nice try lmao';
 
 function updateNumbers() {
     buttons.forEach((button) => {
         button.addEventListener("click", (value) => {
+            if (currentOperation.textContent === errorText) {
+                resultBox.textContent = '';
+                currentOperation.textContent = '';
+            }
+
             button.firstElementChild.classList.contains('one') ? value = 1 :
             button.firstElementChild.classList.contains('two') ? value = 2 :
             button.firstElementChild.classList.contains('three') ? value = 3 :
@@ -68,33 +84,60 @@ function updateNumbers() {
             value = '';
     
             currentValue = resultBox.textContent += value;
+            currentOperation.textContent += value;
 
             if (button.firstElementChild.classList.contains('clear')) {
                 resultBox.textContent = '';
-                currentValue = null;
+                currentOperation.textContent = '';
             }
 
             if (button.classList.contains('operator')) {
                 if (values.length < 2) {
                     prevValue = currentValue;
                     operator = button.firstElementChild.textContent
+                    console.log(operator);
                     values.push(prevValue);
                     values.push(operator);
                     resultBox.textContent = '';
+                    currentOperation.textContent += ` ${operator} `;
                 }
+                
                
                 
             }
             
             if (button.firstElementChild.classList.contains('equals')) {
+                let newValues;
+                let result;
                 values.push(currentValue);
                 if (values.find((element) => element === '+')) {
-                    let newValues = values.slice(0, (values.indexOf('+') + 2));
-                    resultBox.textContent = add(newValues.filter((item) => +item).reduce((acc,x) => acc.concat(+x), []));
+                    newValues = values.slice(0, (values.indexOf('+') + 2));
+                    result = resultBox.textContent = add(newValues.filter((item) => +item).reduce((acc,x) => acc.concat(+x), []));
+                    currentOperation.textContent = result;
+                }
+                if (values.find((element) => element === '-')) {
+                    newValues = values.slice(0, (values.indexOf('-') + 2));
+                    result = resultBox.textContent = subtract(newValues.filter((item) => +item).reduce((acc,x) => acc.concat(+x), []));
+                    currentOperation.textContent = result;
+                }
+                if (values.find((element) => element === 'x')) {
+                    newValues = values.slice(0, (values.indexOf('x') + 2));
+                    result = resultBox.textContent = multiply(newValues.filter((item) => +item).reduce((acc,x) => acc.concat(+x), []));
+                    currentOperation.textContent = result;
+                }
+                if (values.find((element) => element === '/')) {
+                    newValues = values.slice(0, (values.indexOf('/') + 2));
+                    let checkIfDivideByZero = newValues.filter((item) => +item).reduce((acc,x) => acc.concat(+x), []);
+                    if (checkIfDivideByZero.length === 1) {
+                        result = resultBox.textContent = errorText;
+                        currentOperation.textContent = result;
+                    } else {
+                        resultBox.textContent = divide(checkIfDivideByZero);
+                        currentOperation.textContent = result;
+                    }
                 }
                 values = [];
             }
-            
         })
     })
 }

@@ -37,6 +37,10 @@ body {
     background-color: lightslategray;
 }
 
+.resultsBox .results {
+    display: none;
+}
+
 .numbersBox {
     display: flex;
     flex-wrap: wrap;
@@ -56,6 +60,7 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 36px;
+    cursor: pointer;
 }
 
 .button.operator {
