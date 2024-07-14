@@ -10,4 +10,5 @@ To-Do:\
     -Add decimal functionality\
     -Fix the calculator breaking if user divides zero by zero\
     -Add a backspace\
-    -Improve CSS
+    -Improve CSS\
+    -Make whatever the fuck algorithm I created to evaluate the expressions at least somewhat decent
